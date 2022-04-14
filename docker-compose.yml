@@ -37,6 +37,7 @@ services:
             - "8001:80"
         networks:
             - network
+        restart: 'always'
 
 volumes:
     database:

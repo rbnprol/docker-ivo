@@ -1,5 +1,5 @@
 FROM node:latest AS node
-FROM php:fpm
+FROM php:8.1.4-fpm
 
 ARG TIMEZONE
 
