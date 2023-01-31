@@ -12,31 +12,37 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         ports:
-            - "3306:3306"
+            - "3307:3306"
         networks:
             - network
+        restart:
+            'always'
     php:
         build:
             context: ./infrastructure/php
             args:
                 TIMEZONE: ${TIMEZONE}
         volumes:
-            - ./src:/var/www/ivo:cached
+            - ./src:/var/www/app:cached
         ports:
-            - "9000:9000"
+            - "9001:9000"
         networks:
             - network
         depends_on:
             - mysql
+        restart:
+            'always'
     nginx:
         build:
             context: ./infrastructure/nginx
         volumes:
-            - ./src:/var/www/ivo:cached
+            - ./src:/var/www/app:cached
         ports:
-            - "80:80"
+            - "8001:80"
         networks:
             - network
+        restart:
+            'always'
 
 volumes:
     database:
